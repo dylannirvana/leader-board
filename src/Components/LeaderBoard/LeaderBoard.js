@@ -187,15 +187,25 @@ class LeaderBoard extends Component {
 
   handleEdit(data) {
     console.log(data)
+
     this.setState({
       id: data.id,
       firstName: data.firstName,
       lastName: data.lastName,
-
-      data: data,
+      total: data.total,
+      thru: data.thru,
+      today: data.today,
+      round1: data.round1,
+      round2: data.round2,
+      round3: data.round3,
+      round4: data.round4,
     })
+    
 
-    console.log(this.state.data)
+    console.log(data)
+    //const noDups = this.removeDuplicates(this.state.playerData, data.lastName)
+    //console.log(`This is the orig player data ${this.state.playerData}`);
+    //console.log(`This is the new player data ${noDups}`);
   }
 
   handleFormChange = event => {
@@ -206,9 +216,7 @@ class LeaderBoard extends Component {
   };
 
   handleFormSubmit = event => {
-    if (this.state.id) {
-      this.handleDelete(this.state.id) 
-    }
+   
     event.preventDefault();
     const {
       firstName,
@@ -219,10 +227,11 @@ class LeaderBoard extends Component {
       round1,
       round2,
       round3,
-      round4
+      round4,
     } = this.state;
-    const players = this.state.playerData;
-    const id = players.length + 1;
+  
+    let playerData = this.state.playerData;
+    const id =  (this.state.id ? this.state.id : playerData.length + 1);
     const newPlayerData = {
       id: id,
       firstName: firstName,
@@ -236,19 +245,34 @@ class LeaderBoard extends Component {
       round4: parseInt(round4)
     };
     console.log(newPlayerData);
-    let playerData = this.state.playerData;
+    
+ // either update object or create a new one 
+    if (this.state.id) {
+      const id = this.state.id;
+      const playerIndex = playerData.findIndex(obj => obj.id === id)
+      console.log(`The index is ${playerIndex} the id is ${id} `)
+      playerData[playerIndex] = newPlayerData;
+    } else {
     playerData = playerData.concat(newPlayerData);
-    this.setState({
-      playerData: playerData
+  }
+
+    console.log(playerData)
+    let sortedPlayerData = playerData.sort((p, p2) => {
+      return p.total - p2.total;
     });
 
-    console.log(this.state.playerData);
-    // this.sortLeaderBoard()
+    this.setState({
+      playerData: sortedPlayerData,
+    });
+  
+   
+
     this.clearForm();
+    
   };
 
   clearForm() {
-   /* this.setState({
+   this.setState({
     id: null, 
     firstName: '',
     lastName: '',
@@ -260,7 +284,9 @@ class LeaderBoard extends Component {
     round3: '',
     round4: '',
     })
-  */  }
+    }
+
+ 
 
   render() {
     const ColumnHeader = this.getTableColumns();
