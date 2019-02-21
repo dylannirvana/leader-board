@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './pga_logo.png';
 import Header from './Components/Header';
 import LeaderBoard from './Components/LeaderBoard';
 import './App.css';

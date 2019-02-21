@@ -1,4 +1,4 @@
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import React from 'react'
 import Flag from '../../flag.png';
 // import {AppContext} from "./AppProvider"
@@ -22,30 +22,12 @@ padding: 15px;
 height: 95px;
 `
 
-
-
-const ControlButtonElem = styled.div`
-  cursor: pointer;
-  ${props =>
-  props.active &&
-  css`
-      text-shadow: 0px 0px 60px #03ff03;
-    `};
-  ${props => props.hidden && css`
-    display: none;
-  `}
-`
-
 const AppHeader = styled.div`
   background-color: rgb(19, 53, 90);
   display: grid;
   grid-template-columns: 180px auto 100px 100px;
   margin-bottom: 40px;
 `
-
-function toProperCase(lower) {
-	return lower.charAt(0).toUpperCase() + lower.substr(1)
-}
 
 
 export default function () {

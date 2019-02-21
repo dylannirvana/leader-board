@@ -3,9 +3,11 @@
 }
 
 .table {
-    width: 70%;
-    margin: 0 auto;
+    width: 40% !important;
+    margin: 0 auto !important;
+  
 }
+
 
 .tableHeader {
     color: white;
@@ -17,7 +19,23 @@
     width: 25%;
     margin: 0 auto;
 }
+.formHeader {
+    width: 25%;
+    margin-top: 50px;
+    background-color: darkgreen;
+    color: white;
+    
+}
 
 .formInput {
     margin-top: 20px;
+}
+
+
+
+.weather {
+    align-self: flex-start;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
 }
